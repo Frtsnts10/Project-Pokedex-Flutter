@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pokedex/bloc/navCubit.dart';
 import 'bloc/pokeBloc.dart';
 import 'bloc/pokeState.dart';

@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 
 class PokemonSpeciesInfoResponse {
   final String description;
 
-  PokemonSpeciesInfoResponse({@required this.description});
+  PokemonSpeciesInfoResponse({required this.description});
 
   factory PokemonSpeciesInfoResponse.fromJson(Map<String, dynamic> json) {
     return PokemonSpeciesInfoResponse(

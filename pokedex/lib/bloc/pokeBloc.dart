@@ -8,7 +8,6 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
 
   PokemonBloc() : super(PokemonInitial());
 
-  @override
   Stream<PokemonState> mapEventToState(PokemonEvent event) async* {
     if (event is PokemonPageRequest) {
       yield PokemonLoadInProgress();

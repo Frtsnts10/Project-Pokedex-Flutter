@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 
 class PokemonInfoResponse {
   final int id;
@@ -9,14 +9,12 @@ class PokemonInfoResponse {
   final int weight;
 
   PokemonInfoResponse(
-      {
-        @required this.id,
-        @required this.name,
-        @required this.imageUrl,
-        @required this.types,
-        @required this.height,
-        @required this.weight
-        });
+      {required this.id,
+      required this.name,
+      required this.imageUrl,
+      required this.types,
+      required this.height,
+      required this.weight});
 
   factory PokemonInfoResponse.fromJson(Map<String, dynamic> json) {
     final types = (json['types'] as List)

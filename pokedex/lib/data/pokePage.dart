@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 /*
 count:1118
 next:"https://pokeapi.co/api/v2/pokemon?offset=300&limit=100"
@@ -18,8 +17,8 @@ class PokemonListing {
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png';
 
   PokemonListing({
-    @required this.id, 
-    @required this.name
+    required this.id, 
+    required this.name
     });
 
   factory PokemonListing.fromJson(Map<String, dynamic> json) {
@@ -37,8 +36,8 @@ class PokemonPageResponse {
 
   PokemonPageResponse(
       {
-        @required this.pokemonListings, 
-        @required this.canLoadNextPage
+required this.pokemonListings, 
+required this.canLoadNextPage
         });
 
   factory PokemonPageResponse.fromJson(Map<String, dynamic> json) {

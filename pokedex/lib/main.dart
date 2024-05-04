@@ -6,7 +6,6 @@ import 'bloc/navCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       theme: Theme.of(context)
-          .copyWith(primaryColor: Colors.red, accentColor: Colors.redAccent),
+          .copyWith(primaryColor: Colors.red, hintColor: Colors.redAccent),
           debugShowCheckedModeBanner: false,
           
       home: MultiBlocProvider(
