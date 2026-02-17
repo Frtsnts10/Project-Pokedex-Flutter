@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/features/favorites/bloc/favorites_cubit.dart';
 
+import 'package:pokedex/features/settings/presentation/pages/settings_view.dart';
+
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -83,7 +85,8 @@ class _ProfileState extends State<Profile> {
               title: Text('Settings'),
               trailing: Icon(Icons.chevron_right),
               onTap: () {
-                // Navigate to settings
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SettingsView()));
               },
             ),
             ListTile(

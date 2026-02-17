@@ -5,7 +5,7 @@ import 'package:pokedex/features/pokemon/presentation/pages/pokedex_view.dart';
 import 'package:pokedex/features/favorites/presentation/pages/favorites_view.dart';
 import 'package:pokedex/shared/widgets/profile_icon.dart';
 
-import 'package:pokedex/features/settings/presentation/pages/settings_view.dart';
+import 'package:pokedex/features/notifications/presentation/pages/notifications_view.dart';
 import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_search_delegate.dart';
 
 class HomeView extends StatelessWidget {
@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
               PokedexView(),
               FavoritesView(),
               Container(), // Dummy for Search gap
-              SettingsView(),
+              NotificationsView(),
               Profile(),
             ],
           ),
@@ -50,8 +50,8 @@ class HomeView extends StatelessWidget {
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings_rounded),
-                label: 'Settings',
+                icon: Icon(Icons.notifications_rounded),
+                label: 'Notifications',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_rounded),
@@ -84,7 +84,7 @@ class HomeView extends StatelessWidget {
       case 1:
         return 'Favorites';
       case 3: // Index 2 is Search/Empty
-        return 'Settings';
+        return 'Notifications';
       case 4:
         return 'Profile';
       default:
