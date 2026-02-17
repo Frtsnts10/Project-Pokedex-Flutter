@@ -1,17 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepository {
-  final FirebaseAuth _firebaseAuth;
+  final FirebaseAuth? _firebaseAuth;
   final GoogleSignIn _googleSignIn;
 
   static bool _isInitialized = false;
 
   AuthRepository({FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignIn})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn.instance;
+      : _googleSignIn = googleSignIn ?? GoogleSignIn.instance,
+        _firebaseAuth = firebaseAuth ??
+            (Firebase.apps.isNotEmpty ? FirebaseAuth.instance : null);
 
   Future<User?> signInWithGoogle() async {
+    if (_firebaseAuth == null) {
+      print('Firebase not initialized. Cannot sign in.');
+      return null;
+    }
     try {
       if (!_isInitialized) {
         await _googleSignIn.initialize();
@@ -29,7 +35,7 @@ class AuthRepository {
       );
 
       final UserCredential userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
+          await _firebaseAuth!.signInWithCredential(credential);
       return userCredential.user;
     } catch (e) {
       if (e is GoogleSignInException &&
@@ -43,8 +49,9 @@ class AuthRepository {
 
   Future<void> signOut() async {
     await _googleSignIn.signOut();
-    await _firebaseAuth.signOut();
+    await _firebaseAuth?.signOut();
   }
 
-  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+  Stream<User?> get authStateChanges =>
+      _firebaseAuth?.authStateChanges() ?? Stream.value(null);
 }
