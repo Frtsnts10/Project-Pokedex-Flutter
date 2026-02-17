@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/features/nav/cubit/bottom_nav_cubit.dart';
 import 'package:pokedex/features/pokemon/bloc/pokemon_bloc.dart';
 import 'package:pokedex/features/pokemon/bloc/pokemon_details_cubit.dart';
-import 'package:pokedex/features/pokemon/data/repositories/pokemon_repository.dart';
 import 'package:pokedex/features/nav/presentation/pages/home_view.dart';
 import 'package:pokedex/features/favorites/bloc/favorites_cubit.dart';
 import 'package:pokedex/features/pokemon/bloc/pokemon_event.dart';

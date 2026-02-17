@@ -5,20 +5,26 @@ class AuthRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
 
+  static bool _isInitialized = false;
+
   AuthRepository({FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignIn})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn();
+        _googleSignIn = googleSignIn ?? GoogleSignIn.instance;
 
   Future<User?> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return null; // User canceled
+      if (!_isInitialized) {
+        await _googleSignIn.initialize();
+        _isInitialized = true;
+      }
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final GoogleSignInAccount account = await _googleSignIn.authenticate();
+
+      final GoogleSignInAuthentication googleAuth = account.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
+        accessToken:
+            null, // Access token is separated in v7, often not needed for Firebase with just OpenID
         idToken: googleAuth.idToken,
       );
 
@@ -26,6 +32,10 @@ class AuthRepository {
           await _firebaseAuth.signInWithCredential(credential);
       return userCredential.user;
     } catch (e) {
+      if (e is GoogleSignInException &&
+          e.code == GoogleSignInExceptionCode.canceled) {
+        return null;
+      }
       print('Error signing in with Google: $e');
       rethrow;
     }
