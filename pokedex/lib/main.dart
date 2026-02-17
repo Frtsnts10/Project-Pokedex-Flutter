@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/features/nav/cubit/bottom_nav_cubit.dart';
+import 'package:pokedex/features/pokemon/bloc/pokemon_bloc.dart';
 import 'package:pokedex/features/pokemon/bloc/pokemon_details_cubit.dart';
 import 'package:pokedex/features/pokemon/data/repositories/pokemon_repository.dart';
 import 'package:pokedex/features/nav/presentation/pages/home_view.dart';
@@ -33,8 +34,8 @@ class PokedexApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => PokemonBloc(PokemonRepository())
-              ..add(PokemonPageRequest(page: 0))),
+            create: (context) =>
+                PokemonBloc()..add(PokemonPageRequest(page: 0))),
         BlocProvider(
             create: (context) =>
                 NavCubit(pokemonDetailsCubit: pokemonDetailsCubit)),
